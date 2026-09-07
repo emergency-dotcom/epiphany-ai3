@@ -1,0 +1,36 @@
+name: Robot 2K validation
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Validate JSON manifests
+        run: |
+          python -m json.tool robot2k/scenarios.json >/dev/null
+          python -m json.tool nvidia/manifest.json >/dev/null
+
+      - name: Compile adapter
+        run: python -m py_compile nvidia/robot2k_adapter.py
+
+      - name: Run local synthetic adapter
+        run: |
+          python nvidia/robot2k_adapter.py --scenario free-throw-precision > /tmp/robot2k-run.json
+          python -m json.tool /tmp/robot2k-run.json >/dev/null
+
+      - name: Check browser entrypoint
+        run: test -s index.html

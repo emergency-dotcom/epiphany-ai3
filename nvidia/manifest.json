@@ -1,0 +1,59 @@
+{
+  "manifest_version": "0.1.0",
+  "project": "Robot 2K",
+  "owner": "Epiphany AI3 LLC",
+  "principle": "Use what we have the right to use. Credit what we did not create. Protect what we did create.",
+  "runtime_policy": {
+    "default_mode": "SYNTHETIC_BROWSER_RUN",
+    "external_runtime": "OPT_IN_ONLY",
+    "human_authority": "REQUIRED",
+    "physical_action": "DISABLED"
+  },
+  "sources": [
+    {
+      "id": "nvidia-isaac-groot",
+      "name": "NVIDIA Isaac GR00T",
+      "repository": "https://github.com/NVIDIA/Isaac-GR00T",
+      "role": "candidate vision-language-action policy/reference layer",
+      "license": "Apache-2.0 (as stated by repository)",
+      "status": "DOCUMENTED_CANDIDATE",
+      "integration": "external policy endpoint; not bundled in browser"
+    },
+    {
+      "id": "nvidia-isaacteleop",
+      "name": "NVIDIA IsaacTeleop",
+      "repository": "https://github.com/NVIDIA/IsaacTeleop",
+      "role": "candidate teleoperation and demonstration capture layer",
+      "license": "REVIEW_REQUIRED",
+      "status": "DOCUMENTED_CANDIDATE",
+      "integration": "review repository and dependency licenses before use"
+    },
+    {
+      "id": "nvidia-cosmos",
+      "name": "NVIDIA Cosmos",
+      "repository": "https://github.com/NVIDIA/cosmos",
+      "role": "candidate world-model and scenario-generation layer",
+      "license": "OpenMDW-1.1 for model materials (as stated by repository)",
+      "status": "DOCUMENTED_CANDIDATE",
+      "integration": "external world-model service; outputs require validation"
+    },
+    {
+      "id": "nvidia-aodt",
+      "name": "NVIDIA Aerial Omniverse Digital Twin",
+      "repository": "https://github.com/NVIDIA/aerial-omniverse-digital-twin",
+      "role": "digital-twin client, worker, and viewer patterns",
+      "license": "Apache-2.0 (as stated by repository)",
+      "status": "DOCUMENTED_CANDIDATE",
+      "integration": "pattern reference; not bundled in browser"
+    }
+  ],
+  "epiphany_layer": [
+    "visible state",
+    "authority boundary",
+    "evidence ledger",
+    "human review",
+    "failure and retry capture",
+    "portable export",
+    "license and provenance record"
+  ]
+}
