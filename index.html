@@ -1,1 +1,496 @@
-<!doctype html> <html> <head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <title>Epiphany AI3</title> </head> <body style="font-family: Arial, sans-serif; margin: 40px; max-width: 800px;"> <h1>Epiphany AI3 LLC</h1> <p><strong>Simple systems. Practical AI. Real-world problem solving.</strong></p> <p> Epiphany AI3 is an early-stage idea focused on using artificial intelligence to simplify business operations, reduce paperwork, and support real working professionals in trades and healthcare. </p> <h2>What we do</h2> <ul> <li>AI-assisted business workflow simplification</li> <li>Light automation for service companies</li> <li>Practical tools for field technicians and small teams</li> </ul> <h2>Status</h2> <p>Early development. Building quietly. Real-world testing in progress.</p> <h2>Contact</h2> <p>Email: yourname@domain.com (replace this later)</p> </body> </html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="Robot 2K — an Epiphany AI3 physical-AI training and qualification twin.">
+  <title>Robot 2K — Epiphany AI3</title>
+  <style>
+    :root {
+      --ink: #f6fbff;
+      --muted: #91a7ba;
+      --muted-2: #668096;
+      --bg: #06101d;
+      --panel: rgba(13, 29, 47, .82);
+      --panel-2: rgba(16, 38, 60, .9);
+      --line: rgba(145, 194, 225, .16);
+      --cyan: #54e6ff;
+      --cyan-2: #23b8d8;
+      --orange: #ff9e59;
+      --lime: #c7f36a;
+      --red: #ff667e;
+      --shadow: 0 24px 70px rgba(0, 0, 0, .28);
+      --radius: 22px;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { min-width: 320px; background: var(--bg); }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--sans);
+      background:
+        radial-gradient(circle at 12% 0%, rgba(84, 230, 255, .15), transparent 32rem),
+        radial-gradient(circle at 88% 8%, rgba(255, 158, 89, .12), transparent 28rem),
+        linear-gradient(180deg, #071523 0%, #06101d 64%, #07111f 100%);
+      min-height: 100vh;
+    }
+    button, select { font: inherit; }
+    button { cursor: pointer; }
+    .app-shell { width: min(1480px, calc(100% - 36px)); margin: 0 auto; padding: 22px 0 44px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 30px; }
+    .brand { display: flex; align-items: center; gap: 13px; }
+    .brand-mark {
+      width: 42px; height: 42px; display: grid; place-items: center; border-radius: 13px;
+      color: var(--bg); font-weight: 950; letter-spacing: -.08em;
+      background: linear-gradient(135deg, var(--cyan), #c7f36a);
+      box-shadow: 0 0 0 6px rgba(84, 230, 255, .08), 0 12px 30px rgba(84, 230, 255, .22);
+    }
+    .brand h1 { margin: 0; font-size: 16px; letter-spacing: .11em; text-transform: uppercase; }
+    .brand p { margin: 4px 0 0; color: var(--muted); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+    .top-actions { display: flex; align-items: center; gap: 10px; }
+    .runtime-pill, .tag {
+      display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 999px;
+      color: var(--muted); background: rgba(255,255,255,.035); padding: 8px 11px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+    }
+    .runtime-pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 12px var(--orange); }
+    .button {
+      border: 1px solid transparent; border-radius: 12px; padding: 11px 15px; color: var(--ink); font-size: 12px;
+      font-weight: 800; letter-spacing: .08em; text-transform: uppercase; transition: transform .2s, border-color .2s, background .2s;
+    }
+    .button:hover { transform: translateY(-1px); }
+    .button-primary { color: #03101b; background: var(--cyan); box-shadow: 0 10px 30px rgba(84,230,255,.18); }
+    .button-secondary { border-color: var(--line); background: rgba(255,255,255,.04); }
+    .button-danger { border-color: rgba(255,102,126,.35); color: #ffc3ce; background: rgba(255,102,126,.08); }
+    .button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+    .hero {
+      position: relative; display: grid; grid-template-columns: 1.15fr .85fr; overflow: hidden; min-height: 330px;
+      border: 1px solid var(--line); border-radius: 30px; background: linear-gradient(115deg, rgba(16,43,65,.93), rgba(10,20,35,.75));
+      box-shadow: var(--shadow); isolation: isolate;
+    }
+    .hero::after { content: ""; position: absolute; inset: auto -20% -70% 20%; height: 100%; background: radial-gradient(ellipse, rgba(84,230,255,.19), transparent 66%); pointer-events: none; }
+    .hero-copy { padding: clamp(28px, 5vw, 66px); z-index: 1; }
+    .eyebrow { margin: 0 0 13px; color: var(--cyan); font: 700 11px var(--mono); letter-spacing: .16em; text-transform: uppercase; }
+    .hero h2 { max-width: 700px; margin: 0; font-size: clamp(38px, 6vw, 82px); line-height: .93; letter-spacing: -.065em; }
+    .hero h2 span { color: var(--orange); }
+    .hero-copy > p:not(.eyebrow) { max-width: 620px; margin: 21px 0 28px; color: #b8cad8; font-size: 16px; line-height: 1.55; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .hero-art { position: relative; min-height: 330px; overflow: hidden; }
+    .court-glow { position: absolute; inset: 12% 9% 10%; border: 1px solid rgba(84,230,255,.25); border-radius: 50%; transform: rotate(-16deg); box-shadow: inset 0 0 80px rgba(84,230,255,.07), 0 0 55px rgba(84,230,255,.07); }
+    .court-glow::before, .court-glow::after { content: ""; position: absolute; border: 1px solid rgba(255,158,89,.34); border-radius: 50%; }
+    .court-glow::before { inset: 20% 14%; }
+    .court-glow::after { inset: 35% 28%; }
+    .robot-orb {
+      position: absolute; left: 52%; top: 50%; width: 178px; height: 178px; transform: translate(-50%, -50%);
+      display: grid; place-items: center; border: 1px solid rgba(199,243,106,.45); border-radius: 50%;
+      background: radial-gradient(circle at 35% 28%, rgba(199,243,106,.32), rgba(84,230,255,.07) 38%, rgba(4,13,24,.7) 70%);
+      box-shadow: 0 0 0 15px rgba(84,230,255,.04), 0 0 70px rgba(84,230,255,.2);
+    }
+    .robot-orb svg { width: 112px; height: 112px; filter: drop-shadow(0 0 14px rgba(84,230,255,.45)); }
+    .signal { position: absolute; display: flex; align-items: center; gap: 8px; color: var(--muted); font: 10px var(--mono); letter-spacing: .11em; text-transform: uppercase; }
+    .signal b { display: block; width: 7px; height: 7px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 12px var(--lime); }
+    .signal.one { right: 8%; top: 26%; } .signal.two { left: 13%; bottom: 23%; } .signal.three { right: 17%; bottom: 18%; }
+    .dashboard-grid { display: grid; grid-template-columns: .84fr 1.5fr .84fr; gap: 16px; margin-top: 16px; }
+    .panel { border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); box-shadow: 0 16px 42px rgba(0,0,0,.12); }
+    .panel-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding: 21px 22px 0; }
+    .panel-kicker { margin: 0 0 7px; color: var(--muted-2); font: 700 10px var(--mono); letter-spacing: .13em; text-transform: uppercase; }
+    .panel h3 { margin: 0; font-size: 18px; letter-spacing: -.025em; }
+    .panel-body { padding: 20px 22px 22px; }
+    .roster-card { display: grid; grid-template-columns: 72px 1fr; align-items: center; gap: 15px; margin-bottom: 22px; padding: 14px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,.035); }
+    .avatar { width: 72px; height: 72px; display: grid; place-items: center; border-radius: 18px; background: linear-gradient(145deg, #163e58, #0c1e31); color: var(--cyan); }
+    .avatar svg { width: 50px; height: 50px; }
+    .roster-card h4 { margin: 0; font-size: 16px; }
+    .roster-card p { margin: 5px 0 0; color: var(--muted); font-size: 12px; }
+    .stat-row { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+    .stat-row strong { color: var(--ink); font-family: var(--mono); font-size: 12px; }
+    .stage-panel { overflow: hidden; }
+    .stage { position: relative; height: 310px; margin: 0 22px 20px; overflow: hidden; border: 1px solid rgba(84,230,255,.2); border-radius: 18px; background: #071522; }
+    .stage::before { content: ""; position: absolute; inset: 0; opacity: .34; background-image: linear-gradient(rgba(84,230,255,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(84,230,255,.13) 1px, transparent 1px); background-size: 32px 32px; mask-image: linear-gradient(180deg, #000, transparent); }
+    .stage .arc { position: absolute; left: 50%; top: 50%; width: 340px; height: 210px; transform: translate(-50%, -48%); border: 1px solid rgba(255,158,89,.45); border-radius: 50%; }
+    .stage .arc::after { content: ""; position: absolute; inset: 30px 54px; border: 1px solid rgba(84,230,255,.35); border-radius: 50%; }
+    .stage .baseline { position: absolute; left: 8%; right: 8%; top: 67%; height: 1px; background: rgba(84,230,255,.35); }
+    .stage .hoop { position: absolute; right: 11%; top: 24%; width: 34px; height: 34px; border: 3px solid var(--orange); border-radius: 50%; box-shadow: 0 0 22px rgba(255,158,89,.5); }
+    .stage .hoop::after { content: ""; position: absolute; left: 50%; top: 31px; width: 47px; height: 36px; transform: translateX(-50%); border: 1px dashed rgba(255,158,89,.55); border-top: 0; }
+    .stage-robot { position: absolute; left: 39%; top: 35%; width: 94px; height: 125px; color: var(--cyan); transition: left .55s cubic-bezier(.2,.8,.2,1), top .55s cubic-bezier(.2,.8,.2,1), filter .2s; }
+    .stage-robot.running { left: 60%; top: 27%; filter: drop-shadow(0 0 18px rgba(84,230,255,.6)); }
+    .stage-robot.verify { left: 71%; top: 20%; color: var(--lime); }
+    .stage-robot.complete { left: 73%; top: 17%; color: var(--orange); filter: drop-shadow(0 0 16px rgba(255,158,89,.65)); }
+    .stage-robot svg { width: 100%; height: 100%; }
+    .stage-label { position: absolute; left: 17px; bottom: 15px; display: flex; align-items: center; gap: 9px; color: var(--muted); font: 10px var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .stage-label::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 14px var(--cyan); }
+    .scenario-select { width: 100%; margin: 20px 0 15px; padding: 13px 14px; border: 1px solid var(--line); border-radius: 12px; outline: none; color: var(--ink); background: #0b1e30; }
+    .scenario-select:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(84,230,255,.1); }
+    .control-stack { display: grid; gap: 10px; }
+    .control-line { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+    .lock { color: var(--lime); font: 700 10px var(--mono); letter-spacing: .08em; }
+    .run-state { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 13px; padding: 15px; border: 1px solid rgba(84,230,255,.2); border-radius: 14px; background: rgba(84,230,255,.05); }
+    .run-state span:first-child { color: var(--muted); font: 10px var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .run-state strong { color: var(--cyan); font: 700 12px var(--mono); letter-spacing: .1em; }
+    .run-state.running strong { color: var(--orange); } .run-state.verify strong { color: var(--lime); } .run-state.complete strong { color: var(--orange); }
+    .metrics { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 16px; }
+    .metric { padding: 17px; border: 1px solid var(--line); border-radius: 17px; background: rgba(13,29,47,.7); }
+    .metric p { margin: 0 0 11px; color: var(--muted); font-size: 11px; }
+    .metric strong { font-size: 27px; letter-spacing: -.05em; }
+    .metric small { float: right; margin-top: 10px; color: var(--cyan); font: 10px var(--mono); }
+    .bar { height: 4px; margin-top: 13px; overflow: hidden; border-radius: 99px; background: rgba(255,255,255,.08); }
+    .bar i { display: block; width: 0%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--cyan), var(--lime)); transition: width .5s ease; }
+    .workspace { margin-top: 16px; padding-bottom: 4px; }
+    .tabs { display: flex; gap: 5px; padding: 10px 12px 0; border-bottom: 1px solid var(--line); overflow-x: auto; }
+    .tab { border: 0; border-bottom: 2px solid transparent; padding: 13px 15px; color: var(--muted); background: transparent; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
+    .tab.active { border-color: var(--cyan); color: var(--cyan); }
+    .tab-panel { display: none; padding: 25px 22px 28px; } .tab-panel.active { display: block; }
+    .overview-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 20px; }
+    .objective { padding: 20px; border: 1px solid var(--line); border-radius: 16px; background: linear-gradient(135deg, rgba(84,230,255,.08), rgba(255,255,255,.02)); }
+    .objective h4 { margin: 0 0 9px; font-size: 20px; }
+    .objective p { margin: 0; color: var(--muted); line-height: 1.55; }
+    .check-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+    .check-list li { display: flex; gap: 10px; color: #b8cad8; font-size: 13px; line-height: 1.4; }
+    .check-list li::before { content: "✓"; flex: 0 0 auto; color: var(--lime); font-weight: 900; }
+    .scenario-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .scenario-card { min-height: 164px; padding: 17px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,.025); cursor: pointer; transition: border-color .2s, transform .2s, background .2s; }
+    .scenario-card:hover { transform: translateY(-2px); border-color: rgba(84,230,255,.45); }
+    .scenario-card.selected { border-color: var(--cyan); background: rgba(84,230,255,.08); }
+    .scenario-card b { display: inline-block; margin-bottom: 18px; color: var(--orange); font: 700 10px var(--mono); letter-spacing: .1em; }
+    .scenario-card h4 { margin: 0 0 8px; font-size: 15px; }
+    .scenario-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .evidence-list { display: grid; gap: 8px; max-height: 300px; overflow: auto; }
+    .evidence-item { display: grid; grid-template-columns: 100px 1fr auto; align-items: center; gap: 12px; padding: 13px 14px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.025); font-size: 12px; }
+    .evidence-item time { color: var(--muted-2); font: 10px var(--mono); }
+    .evidence-item p { margin: 0; color: #c9d6df; }
+    .evidence-item .tag { padding: 5px 8px; color: var(--cyan); font-size: 9px; }
+    .source-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 11px; }
+    .source { padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.025); }
+    .source h4 { margin: 0 0 8px; font-size: 14px; }
+    .source p { min-height: 45px; margin: 0 0 13px; color: var(--muted); font-size: 11px; line-height: 1.45; }
+    .source a { color: var(--cyan); font: 10px var(--mono); letter-spacing: .05em; text-decoration: none; }
+    .source a:hover { text-decoration: underline; }
+    .footer { display: flex; justify-content: space-between; gap: 20px; margin-top: 20px; color: var(--muted-2); font-size: 11px; }
+    .footer strong { color: var(--muted); }
+    .toast { position: fixed; right: 20px; bottom: 20px; z-index: 5; max-width: 340px; padding: 13px 15px; border: 1px solid rgba(84,230,255,.35); border-radius: 12px; color: var(--ink); background: #0d263b; box-shadow: var(--shadow); font-size: 12px; opacity: 0; transform: translateY(10px); pointer-events: none; transition: opacity .2s, transform .2s; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    @media (max-width: 1100px) { .dashboard-grid { grid-template-columns: 1fr 1.4fr; } .control-panel { grid-column: 1 / -1; } .control-panel .panel-body { display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; } .control-panel .scenario-select { margin-top: 0; } .scenario-grid { grid-template-columns: repeat(2, 1fr); } .source-list { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 760px) { .app-shell { width: min(100% - 22px, 600px); padding-top: 14px; } .topbar { align-items: flex-start; } .runtime-pill { display: none; } .hero { grid-template-columns: 1fr; } .hero-art { min-height: 230px; } .hero-copy { padding: 33px 25px 12px; } .hero h2 { font-size: 54px; } .dashboard-grid, .overview-grid { grid-template-columns: 1fr; } .control-panel { grid-column: auto; } .control-panel .panel-body { display: block; } .metrics { grid-template-columns: repeat(2, 1fr); } .metric:last-child { grid-column: 1 / -1; } .scenario-grid, .source-list { grid-template-columns: 1fr; } .evidence-item { grid-template-columns: 75px 1fr; } .evidence-item .tag { grid-column: 2; justify-self: start; } .footer { flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">R2</div>
+        <div>
+          <h1>Robot 2K</h1>
+          <p>Epiphany AI3 · physical-ai twin</p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <span class="runtime-pill">Synthetic runtime</span>
+        <button class="button button-secondary" id="exportTop">Export evidence</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Training court / qualification build 001</p>
+          <h2>Train the robot.<br><span>Verify the outcome.</span></h2>
+          <p>Robot 2K makes physical-AI behavior legible through a familiar game loop. Every run exposes state, assumptions, authority, and evidence before anyone trusts the score.</p>
+          <div class="hero-actions">
+            <button class="button button-primary" id="heroRun">Run qualification</button>
+            <button class="button button-secondary" id="heroEvidence">Open evidence</button>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="court-glow"></div>
+          <div class="robot-orb">
+            <svg viewBox="0 0 120 120" fill="none">
+              <path d="M35 78c0-19 11-34 25-34s25 15 25 34" stroke="#54e6ff" stroke-width="5" stroke-linecap="round"/>
+              <rect x="34" y="24" width="52" height="39" rx="15" stroke="#c7f36a" stroke-width="5"/>
+              <circle cx="52" cy="43" r="5" fill="#ff9e59"/><circle cx="69" cy="43" r="5" fill="#ff9e59"/>
+              <path d="M46 54c9 6 19 6 28 0M35 77l-12 18M85 77l12 18M50 79v18M70 79v18" stroke="#c7f36a" stroke-width="5" stroke-linecap="round"/>
+              <path d="M23 95h-8M97 95h8M50 99h-8M70 99h8" stroke="#54e6ff" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="signal one"><b></b>vision / ready</div>
+          <div class="signal two"><b></b>human review</div>
+          <div class="signal three"><b></b>evidence locked</div>
+        </div>
+      </section>
+
+      <section class="dashboard-grid" aria-label="Robot 2K command deck">
+        <aside class="panel">
+          <div class="panel-head"><div><p class="panel-kicker">Roster</p><h3>Robot profile</h3></div><span class="tag">R2-001</span></div>
+          <div class="panel-body">
+            <div class="roster-card">
+              <div class="avatar">
+                <svg viewBox="0 0 100 100" fill="none">
+                  <rect x="27" y="18" width="46" height="36" rx="13" stroke="currentColor" stroke-width="5"/>
+                  <circle cx="42" cy="35" r="4" fill="currentColor"/><circle cx="58" cy="35" r="4" fill="currentColor"/>
+                  <path d="M30 59 17 78M70 59l13 19M42 59v24M58 59v24M17 78H9M83 78h8M42 83H32M58 83h10" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div><h4>Canyon-01</h4><p>Generalist court robot<br>Embodiment: synthetic humanoid</p></div>
+            </div>
+            <div class="stat-row"><span>Policy mode</span><strong>READ-ONLY</strong></div>
+            <div class="stat-row"><span>Runtime</span><strong id="runtimeValue">LOCAL</strong></div>
+            <div class="stat-row"><span>Human gate</span><strong>REQUIRED</strong></div>
+            <div class="stat-row"><span>Evidence packet</span><strong id="packetValue">EMPTY</strong></div>
+          </div>
+        </aside>
+
+        <section class="panel stage-panel">
+          <div class="panel-head"><div><p class="panel-kicker">Twin court</p><h3 id="stageTitle">Free Throw Precision</h3></div><span class="tag" id="stageTag">READY</span></div>
+          <div class="panel-body">
+            <div class="stage">
+              <div class="arc"></div><div class="baseline"></div><div class="hoop"></div>
+              <div class="stage-robot" id="stageRobot">
+                <svg viewBox="0 0 100 130" fill="none">
+                  <rect x="28" y="9" width="44" height="36" rx="13" stroke="currentColor" stroke-width="4"/>
+                  <circle cx="42" cy="26" r="4" fill="currentColor"/><circle cx="58" cy="26" r="4" fill="currentColor"/>
+                  <path d="M39 37c7 5 15 5 22 0M30 53l-16 25M70 53l16 25M42 53v38M58 53v38M14 78H5M86 78h9M42 91l-10 28M58 91l10 28M32 119H21M68 119h11" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="stage-label" id="stageLabel">Waiting for a qualification run</div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel control-panel">
+          <div class="panel-head"><div><p class="panel-kicker">Run control</p><h3>Qualification</h3></div><span class="tag">SAFE MODE</span></div>
+          <div class="panel-body">
+            <div>
+              <label class="panel-kicker" for="scenarioSelect">Scenario</label>
+              <select class="scenario-select" id="scenarioSelect" aria-label="Qualification scenario"></select>
+              <div class="control-stack">
+                <div class="control-line"><span>Authority</span><span class="lock">▣ HUMAN GATED</span></div>
+                <div class="control-line"><span>NVIDIA runtime</span><span class="lock" id="runtimeStatus">NOT CONNECTED</span></div>
+              </div>
+            </div>
+            <div>
+              <div class="run-state" id="runState"><span>Current state</span><strong id="stateValue">READY</strong></div>
+              <div style="display:flex;gap:8px;margin-top:12px">
+                <button class="button button-primary" style="flex:1" id="runButton">Run</button>
+                <button class="button button-danger" id="resetButton">Reset</button>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="metrics" aria-label="Capability metrics">
+        <div class="metric"><p>Perception</p><strong id="metricPerception">--</strong><small>VISION</small><div class="bar"><i id="barPerception"></i></div></div>
+        <div class="metric"><p>Balance</p><strong id="metricBalance">--</strong><small>BODY</small><div class="bar"><i id="barBalance"></i></div></div>
+        <div class="metric"><p>Planning</p><strong id="metricPlanning">--</strong><small>POLICY</small><div class="bar"><i id="barPlanning"></i></div></div>
+        <div class="metric"><p>Recovery</p><strong id="metricRecovery">--</strong><small>FAILURE</small><div class="bar"><i id="barRecovery"></i></div></div>
+        <div class="metric"><p>Evidence</p><strong id="metricEvidence">100</strong><small>LEDGER</small><div class="bar"><i id="barEvidence" style="width:100%"></i></div></div>
+      </section>
+
+      <section class="panel workspace">
+        <nav class="tabs" aria-label="Twin workspace">
+          <button class="tab active" data-tab="overview">Overview</button>
+          <button class="tab" data-tab="scenarios">Scenarios</button>
+          <button class="tab" data-tab="evidence">Evidence <span id="evidenceCount">(0)</span></button>
+          <button class="tab" data-tab="sources">NVIDIA sources</button>
+        </nav>
+
+        <div class="tab-panel active" id="tab-overview">
+          <div class="overview-grid">
+            <div class="objective"><p class="panel-kicker">Selected objective</p><h4 id="objectiveTitle">Repeatable target alignment and release timing.</h4><p id="objectiveText">A synthetic run will measure whether Canyon-01 can line up with a marked target, complete the movement, and report its assumptions without hiding uncertainty.</p></div>
+            <ul class="check-list">
+              <li>Show the state before requesting trust.</li>
+              <li>Keep the policy authority read-only.</li>
+              <li>Record failures, retries, and human review.</li>
+              <li>Export a portable evidence packet.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-scenarios">
+          <div class="scenario-grid" id="scenarioGrid"></div>
+        </div>
+
+        <div class="tab-panel" id="tab-evidence">
+          <div class="evidence-list" id="evidenceList"><div class="evidence-item"><time>—</time><p>No run yet. Evidence will appear here.</p><span class="tag">EMPTY</span></div></div>
+        </div>
+
+        <div class="tab-panel" id="tab-sources">
+          <div class="source-list">
+            <article class="source"><h4>Isaac GR00T</h4><p>Candidate vision-language-action policy/reference layer. Repository states Apache 2.0.</p><a href="https://github.com/NVIDIA/Isaac-GR00T" target="_blank" rel="noreferrer">OPEN SOURCE →</a></article>
+            <article class="source"><h4>Isaac Teleop</h4><p>Candidate teleoperation and demonstration-capture path. Exact dependency licenses require review.</p><a href="https://github.com/NVIDIA/IsaacTeleop" target="_blank" rel="noreferrer">REVIEW REPO →</a></article>
+            <article class="source"><h4>Cosmos</h4><p>Candidate world-model materials for scenario generation. Repository states OpenMDW-1.1.</p><a href="https://github.com/NVIDIA/cosmos" target="_blank" rel="noreferrer">OPEN SOURCE →</a></article>
+            <article class="source"><h4>AODT</h4><p>Digital-twin patterns and viewer/client ideas. Repository includes Apache-2.0 licensing.</p><a href="https://github.com/NVIDIA/aerial-omniverse-digital-twin" target="_blank" rel="noreferrer">OPEN SOURCE →</a></article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span><strong>Evidence before authority.</strong> Robot 2K is a research and demonstration surface.</span>
+      <span>Epiphany AI3 LLC · Tucson, Arizona · Build R2-001</span>
+    </footer>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const scenarios = {
+      "free-throw-precision": {
+        label: "Free Throw Precision",
+        short: "01 / TARGET",
+        objective: "Repeatable target alignment and release timing.",
+        text: "A synthetic run measures whether Canyon-01 can line up with a marked target, complete the movement, and report its assumptions without hiding uncertainty.",
+        metrics: { perception: 88, balance: 81, planning: 76, recovery: 72 },
+        pass: "Target alignment reported; release timing within synthetic tolerance."
+      },
+      "obstacle-recovery": {
+        label: "Obstacle Recovery",
+        short: "02 / RECOVER",
+        objective: "Recover from a blocked path without hiding the failure.",
+        text: "The twin inserts a route obstruction, then checks whether the robot exposes the interruption, selects a bounded recovery, and hands control back when confidence falls.",
+        metrics: { perception: 84, balance: 73, planning: 82, recovery: 91 },
+        pass: "Obstacle exposed; bounded recovery selected; handoff available."
+      },
+      "teleop-handoff": {
+        label: "Teleop Handoff",
+        short: "03 / HUMAN",
+        objective: "Make the transition from policy suggestion to human control visible.",
+        text: "The run stops at the authority boundary. It records what the policy suggested and what the human would need to approve before a real robot could move.",
+        metrics: { perception: 79, balance: 86, planning: 70, recovery: 95 },
+        pass: "Policy remained read-only; human gate displayed before action."
+      },
+      "energy-budget": {
+        label: "Energy Budget",
+        short: "04 / ENERGY",
+        objective: "Complete a session while reporting energy and thermal assumptions.",
+        text: "A bounded session reports synthetic energy draw, thermal assumptions, and remaining capacity alongside task performance.",
+        metrics: { perception: 82, balance: 78, planning: 87, recovery: 74 },
+        pass: "Energy and thermal assumptions recorded with the result."
+      }
+    };
+
+    const state = { scenario: "free-throw-precision", status: "READY", runId: null, events: [], timer: null };
+    const $ = (id) => document.getElementById(id);
+    const nowLabel = () => new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+    const selected = () => scenarios[state.scenario];
+
+    function toast(message) {
+      const el = $("toast"); el.textContent = message; el.classList.add("show");
+      clearTimeout(toast.timer); toast.timer = setTimeout(() => el.classList.remove("show"), 3200);
+    }
+
+    function setStatus(status) {
+      state.status = status;
+      $("stateValue").textContent = status;
+      $("stageTag").textContent = status;
+      $("runState").className = "run-state " + status.toLowerCase();
+      $("stageRobot").className = "stage-robot " + (status === "RUNNING" ? "running" : status === "VERIFYING" ? "verify" : status === "COMPLETE" ? "complete" : "");
+      $("stageLabel").textContent = status === "READY" ? "Waiting for a qualification run" : status === "RUNNING" ? "Executing bounded synthetic scenario" : status === "VERIFYING" ? "Human review gate / checking evidence" : "Run complete · export is available";
+      $("runButton").disabled = status === "RUNNING" || status === "VERIFYING";
+    }
+
+    function addEvent(message, kind) {
+      state.events.unshift({ time: nowLabel(), message, kind: kind || "INFO" });
+      $("evidenceCount").textContent = "(" + state.events.length + ")";
+      $("packetValue").textContent = state.events.length ? "READY" : "EMPTY";
+      $("evidenceList").innerHTML = state.events.map(e => '<div class="evidence-item"><time>' + e.time + '</time><p>' + e.message + '</p><span class="tag">' + e.kind + '</span></div>').join("");
+    }
+
+    function paintMetrics(metrics) {
+      Object.keys(metrics).forEach(key => {
+        $("metric" + key.charAt(0).toUpperCase() + key.slice(1)).textContent = metrics[key];
+        $("bar" + key.charAt(0).toUpperCase() + key.slice(1)).style.width = metrics[key] + "%";
+      });
+    }
+
+    function renderScenario() {
+      const item = selected();
+      $("stageTitle").textContent = item.label;
+      $("objectiveTitle").textContent = item.objective;
+      $("objectiveText").textContent = item.text;
+      $("scenarioSelect").value = state.scenario;
+      $("scenarioGrid").innerHTML = Object.entries(scenarios).map(([id, s]) =>
+        '<article class="scenario-card ' + (id === state.scenario ? "selected" : "") + '" data-scenario="' + id + '"><b>' + s.short + '</b><h4>' + s.label + '</h4><p>' + s.objective + '</p></article>'
+      ).join("");
+      document.querySelectorAll(".scenario-card").forEach(card => card.addEventListener("click", () => {
+        state.scenario = card.dataset.scenario; renderScenario(); resetRun(); showTab("scenarios");
+      }));
+    }
+
+    function resetRun() {
+      clearTimeout(state.timer);
+      state.runId = null; state.events = [];
+      $("evidenceCount").textContent = "(0)"; $("packetValue").textContent = "EMPTY";
+      $("evidenceList").innerHTML = '<div class="evidence-item"><time>—</time><p>No run yet. Evidence will appear here.</p><span class="tag">EMPTY</span></div>';
+      paintMetrics({ perception: 0, balance: 0, planning: 0, recovery: 0 });
+      $("metricPerception").textContent = "--"; $("metricBalance").textContent = "--"; $("metricPlanning").textContent = "--"; $("metricRecovery").textContent = "--";
+      setStatus("READY");
+    }
+
+    function runQualification() {
+      if (state.status === "RUNNING" || state.status === "VERIFYING") return;
+      const item = selected();
+      resetRun();
+      state.runId = "R2-" + Date.now().toString(36).toUpperCase();
+      addEvent("Qualification " + state.runId + " created for " + item.label + ".", "CREATED");
+      addEvent("Authority held at READ-ONLY; no physical action requested.", "GATE");
+      setStatus("RUNNING");
+      state.timer = setTimeout(() => {
+        paintMetrics(item.metrics);
+        addEvent("Synthetic telemetry captured; NVIDIA runtime is not connected.", "SYNTHETIC");
+        setStatus("VERIFYING");
+        state.timer = setTimeout(() => {
+          addEvent(item.pass, "VERIFIED");
+          addEvent("Human review required before any external action.", "REVIEW");
+          setStatus("COMPLETE");
+          toast("Qualification complete. Evidence packet is ready to export.");
+        }, 1200);
+      }, 1800);
+    }
+
+    function exportEvidence() {
+      if (!state.events.length) { toast("Run a qualification first; there is no evidence packet yet."); return; }
+      const payload = {
+        product: "Robot 2K",
+        owner: "Epiphany AI3 LLC",
+        build: "R2-001",
+        exported_at: new Date().toISOString(),
+        scenario: state.scenario,
+        scenario_label: selected().label,
+        status: state.status,
+        authority: "READ_ONLY / HUMAN_GATED",
+        runtime: "SYNTHETIC_BROWSER_RUN",
+        nvidia_runtime_connected: false,
+        metrics: selected().metrics,
+        events: state.events,
+        source_register: [
+          { name: "NVIDIA Isaac GR00T", url: "https://github.com/NVIDIA/Isaac-GR00T", license_note: "Repository states Apache 2.0." },
+          { name: "NVIDIA IsaacTeleop", url: "https://github.com/NVIDIA/IsaacTeleop", license_note: "Review exact repository and dependency licenses before integration." },
+          { name: "NVIDIA Cosmos", url: "https://github.com/NVIDIA/cosmos", license_note: "Repository states OpenMDW-1.1 for model materials." },
+          { name: "NVIDIA Aerial Omniverse Digital Twin", url: "https://github.com/NVIDIA/aerial-omniverse-digital-twin", license_note: "Repository includes Apache-2.0 licensing." }
+        ]
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = "robot2k-" + (state.runId || "evidence") + ".json"; link.click();
+      setTimeout(() => URL.revokeObjectURL(link.href), 500);
+      toast("Evidence packet downloaded.");
+    }
+
+    function showTab(name) {
+      document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.tab === name));
+      document.querySelectorAll(".tab-panel").forEach(p => p.classList.toggle("active", p.id === "tab-" + name));
+    }
+
+    Object.entries(scenarios).forEach(([id, item]) => {
+      const option = document.createElement("option"); option.value = id; option.textContent = item.label; $("scenarioSelect").appendChild(option);
+    });
+    $("scenarioSelect").addEventListener("change", (event) => { state.scenario = event.target.value; renderScenario(); resetRun(); });
+    $("runButton").addEventListener("click", runQualification);
+    $("heroRun").addEventListener("click", runQualification);
+    $("resetButton").addEventListener("click", () => { resetRun(); toast("Run reset. No external action was taken."); });
+    $("exportTop").addEventListener("click", exportEvidence);
+    $("heroEvidence").addEventListener("click", () => showTab("evidence"));
+    document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => showTab(t.dataset.tab)));
+    renderScenario(); resetRun();
+  </script>
+</body>
+</html>
